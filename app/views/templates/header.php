@@ -26,13 +26,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?= BASEURL?>">Home</a>
+          <a class="nav-link active" aria-current="page" href="<?= BASEURL; ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= BASEURL?>/about">About</a>
+          <a class="nav-link" href="<?= BASEURL; ?>/about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="<?= BASEURL; ?>/players">Players</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
