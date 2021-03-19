@@ -24,9 +24,8 @@ class Players_model {
 
 	public function addPlayerData($data)
 	{
-		var_dump($data['name']);
-		var_dump($data['position']);
 		$query = "INSERT INTO players VALUES (:id, :name, :team, :position, :height, :weight)";
+
 		$this->db->query($query);
 		$this->db->bind('id', null);
 		$this->db->bind('name', $data['name']);

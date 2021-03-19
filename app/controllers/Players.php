@@ -24,9 +24,15 @@ class Players extends Controller {
 	public function add()
 	{
 		if($this->model('Players_model')->addPlayerData($_POST) > 0) {
+			Flasher::setFlash('<strong>Success!</strong> - ' . $_POST['name'] . ' data has been added successfully.', 'success');
+			header('Location:' . BASEURL . '/players');
+			exit;
+		} else {
+			Flasher::setFlash('<strong>Error!</strong> - Failed to add new data', 'danger');
 			header('Location:' . BASEURL . '/players');
 			exit;
 		}
 	}
+	
 
 }
