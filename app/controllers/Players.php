@@ -21,5 +21,12 @@ class Players extends Controller {
 		$this->view('templates/footer');
 	}
 
+	public function add()
+	{
+		if($this->model('Players_model')->addPlayerData($_POST) > 0) {
+			header('Location:' . BASEURL . '/players');
+			exit;
+		}
+	}
 
 }

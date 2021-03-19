@@ -67,7 +67,7 @@ class Database {
 		$this->statement->execute();
 	}
 
-	public function getAlls()
+	public function getAll()
 	{
 		$this->execute();
 		return $this->statement->fetchAll(PDO::FETCH_ASSOC);
@@ -80,4 +80,8 @@ class Database {
 	}
 
 
+	public function dataCount()
+	{
+			return $this->statement->rowCount();
+	}
 }
