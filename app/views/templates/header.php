@@ -6,14 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><?= $data['title']; ?></title>
 	<link href="<?= BASEURL; ?>/css/bootstrap.css" rel="stylesheet">
-	<style type="text/css">
-		.jumbotron {
-		padding: 4rem 2rem;
-		margin-bottom: 2rem;
-		background-color: var(--bs-light);
-		border-radius: .3rem;  
-		}
-	</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="<?= BASEURL; ?>/css/main.css">
 </head>
 <body>
 
