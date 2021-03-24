@@ -79,4 +79,96 @@ class Players_model {
 		$this->db->execute();
 		return $this->db->dataCount();
 	}
+
+
+	public function tablePlayerData()
+	{
+		// $query = "SELECT * FROM players WHERE is_deleted = 0 AND team = $team AND position = $position AND name LIKE :keyword ORDER BY $order $sort";
+		// $this->db->query($query);
+
+		$keyword = $_POST['keyword'];
+		$order = $_POST['order'];
+		$sort = $_POST['sort'];
+		$team = $_POST['team'];
+		$position = $_POST['position'];
+		
+		if($team === 'team'){
+			$whereTeam = "AND team = $team ";
+		} else {
+			$whereTeam = "AND team = :team ";
+		}
+
+		if($position === 'position'){
+			$wherePosition = "AND position = $position ";
+		} else {
+			$wherePosition = "AND position = :position ";
+		}
+		
+		$query = "SELECT * FROM players WHERE is_deleted = 0 $whereTeam $wherePosition AND name LIKE :keyword ORDER BY $order $sort";
+		
+		$this->db->query($query);		
+		if($team !== 'team'){
+			$this->db->bind('team', $team);
+		}
+		if($position !== 'position'){
+			$this->db->bind('position', $position);
+		}
+		
+		$this->db->bind('keyword', "%$keyword%");
+
+		return $this->db->getAll();
+	}
+
+
+	public function teamAbbrev($team)
+	{	
+		switch ($team) {
+			case "Brooklyn Nets" :
+				$team = "Bkn";
+				break;			
+			case "Oklahoma City Thunder" :
+				$team = "Okc";
+				break;	
+			case "Phoenix Suns" :
+				$team = "Phx";
+				break;	
+			case "Portland Trail Blazers" :
+				$team = "Por";
+				break;	
+			case str_word_count($team) === 2 :
+				$team = substr($team, 0, 3);
+				break;
+			case str_word_count($team) === 3 :
+				$words = explode(" ", $team);
+				$acronym='';
+				foreach($words as $word) $acronym .= $word[0];
+				$team = $acronym;
+				break;
+			default :
+				$team = "N/A";	
+		}
+		return strtoupper($team);
+	}
+
+
+	public function splitName($data)
+	{
+		foreach ($data as $key => $player) {
+			$data[$key]['name'] = explode(" ", $player['name']);
+			$data[$key]['name']['first'] = $data[$key]['name'][0];
+			$data[$key]['name']['last'] = $data[$key]['name'][1];
+		}
+		return $data;
+	}
+
+
+	public function teamNameAbbr($data)
+	{
+		foreach($data as $key => $player){
+			$data[$key]['team'] = $this->teamAbbrev($player['team']);
+		}
+		return $data;
+	}
+
+
 }

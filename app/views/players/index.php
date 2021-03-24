@@ -2,48 +2,79 @@
 
 	<?php Flasher::showFlash(); ?>
 
+
+	<div class="row mb-3">
+		<div class="col-md-3">
+		<div class="d-grid gap-2">
+		<button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#formModal">
+			Add Player
+		</button>
+		</div>
+		</div>
+	</div>
+
+	<div class="row search-section mb-3">
+		<!-- <form action="<?= BASEURL; ?>/players/search" method="post"> -->
+			<div class="col-md-4 mb-1">
+				<select class="form-select " id="byteam" name="byteam" aria-label="select by team">
+					<option value="team" selected>All teams</option>
+					<?php foreach( $data['teams'] as $team ) : ?>
+					<option value="<?= $team; ?>"><?= $team; ?></option>
+					<?php endforeach ; ?>
+				</select>	
+			</div>
+			<div class="col-md-3 mb-1">
+				<select class="form-select " id="byposition" name="byposition" aria-label="select by position">
+					<option value="position" selected>All positions</option>
+					<?php foreach( $data['positions'] as $position ) : ?>
+					<option value="<?= $position; ?>"><?= $position; ?></option>
+					<?php endforeach ; ?>
+				</select>	
+			</div>
+			<div class="col-md-5 mb-1">
+				<div class="input-group">			
+					<input type="text" class="form-control" placeholder="Search players by name" aria-label="Recipient's username" aria-describedby="basic-addon2" name="keyword" id="keyword">
+					<span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+				</div>
+			</div>
+		<!-- </form> -->
+	</div>
+
 	<div class="row">
 		<div class="col">
-			<button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#formModal">
-			Add Player
-			</button>
-			<br><br>
-			<h3>Player Data List</h3>
-			<div class="table-responsive">
+			<h3 class="fs-5 text-uppercase">Player List</h3>
+			<div class="table-responsive table-scroll">
 			<table class="table table-hover align-middle">
 				<thead class="table-light">
 					<tr>
-					<th scope="col" class="border-end">No</th>
-					<th scope="col">Player</th>
-					<th scope="col" class="team-heading">Team</th>
-					<th scope="col">Position</th>
-					<th scope="col">Height</th>
-					<th scope="col">Weight</th>
-					<th scope="col"></th>
+					<th class="th-sort table-heading__no sorting" scope="col">
+					<span>#</span>
+					<span class="sort-icon"><i class="bi bi-caret-down-fill"></i></i></span>
+					</th>
+					<th class="th-sort table-heading__player" scope="col">
+					<span>Player</span>
+					<span class="sort-icon"><i class="bi bi-caret-down-fill"></i></i></span>
+					</th>
+					<th class="th-sort table-heading" scope="col" class="team-heading">
+					<span>Team</span>
+					<span class="sort-icon"><i class="bi bi-caret-down-fill"></i></i></span>
+					</th>
+					<th class="th-sort table-heading" scope="col">
+					<span>Position</span>
+					<span class="sort-icon"><i class="bi bi-caret-down-fill"></i></i></span>
+					</th>
+					<th class="th-sort table-heading" scope="col">
+					<span>Height</span>
+					<span class="sort-icon"><i class="bi bi-caret-down-fill"></i></i></span>
+					</th>
+					<th class="th-sort table-heading" scope="col">
+					<span>Weight</span>
+					<span class="sort-icon"><i class="bi bi-caret-down-fill"></i></i></span>
+					</th>
+					<th class="table-heading" scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
-				<?php foreach( $data['players'] as $key=>$player) : ?>
-					<tr>
-						<th scope="row" class="border-end"><?= $key + 1; ?></th>
-						<td><a href="<?= BASEURL; ?>/players/detail/<?= $player['id']; ?>" class="text-reset text-decoration-none"><?= $player['name'] ?></a></td>
-						<td><?= $player['team'] ?></td>
-						<td><?= $player['position'] ?></td>
-						<td><?= $player['height'] ?></td>
-						<td><?= $player['weight'] ?></td>
-						<td>
-						<div class="dropstart">
-							<span class="option-icon" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-three-dots-vertical"></i>
-							</span>
-							<ul class="dropdown-menu">
-								<li><a href="<?= BASEURL; ?>/players/edit/<?= $player['id']; ?>" class="dropdown-item edit-btn" data-bs-toggle="modal" data-bs-target="#formModal" data-id="<?= $player['id']; ?>" >Edit</a></li>
-								<li><a href="<?= BASEURL; ?>/players/delete/<?= $player['id'];  ?>" onclick="return confirm('Are you sure you want to delete <?= strtoupper($player['name']); ?> ?')" class="dropdown-item">Delete</a></li>
-							</ul>	
-						</div>
-						</td>
-					</tr>
-				<?php endforeach; ?>
 				</tbody>
 			</table>
 			</div>
